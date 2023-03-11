@@ -9,7 +9,9 @@ function App() {
 	const [imagen, setImagen] = useState("");
 
 	const onChangeLinea1 = function (event) {
-		setLinea1(event.target.value);
+		const nuevoString = event.target.value;
+		//linea1 = nuevoString; // wrong X!
+		setLinea1(nuevoString);
 	};
 
 	const onChangeLinea2 = function (event) {
@@ -21,10 +23,16 @@ function App() {
 	};
 
 	const onClickExportar = function (event) {
-		html2canvas(document.querySelector("#meme")).then((canvas) => {
-			alert("exportado");
-			var img = canvas.toDataUrl("image/png");
-			var link = document.createElement("a");
+		const meme = document.querySelector("#meme");
+		if (!meme) throw Error("meme not defined");
+
+		html2canvas(meme).then((canvas) => {
+			const img = canvas.toDataURL(`image/png`); //tipo por defecto
+			if (!img) {
+				console.log("img not defined");
+				return;
+			}
+			const link = document.createElement("a");
 			link.download = "meme.png";
 			link.href = img;
 			link.click();
