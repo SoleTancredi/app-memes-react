@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
 import html2canvas from "html2canvas";
+//@ts-check
 
 function App() {
 	const [linea1, setLinea1] = useState("");
